@@ -1,2 +1,2 @@
-# universal-next
+# UNIVERSAL next
 Publishing Platform
