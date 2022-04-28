@@ -8,7 +8,6 @@
 
 # Lock files
 composer.phar
-composer.lock
 package-lock.json
 
 # Ignore config and downloaded libraries.
