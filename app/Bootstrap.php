@@ -17,7 +17,14 @@ final class Bootstrap
    */
   private function __construct()
   {
+		// @app
     $this->app = AppFactory::create();
+
+		// @hello-world
+    $this->app->get('/', function (Request $request, Response $response, $args) {
+      $response->getBody()->write("Hello world!");
+      return $response;
+  	});
   }
 
   /**
@@ -42,12 +49,6 @@ final class Bootstrap
 	{
 		// @run
 		$this->app->run();
-
-    // @hello-world
-    $this->app->get('/', function (Request $request, Response $response, $args) {
-      $response->getBody()->write("Hello world!");
-      return $response;
-  	});
 
 		// @self
 		return $this;
