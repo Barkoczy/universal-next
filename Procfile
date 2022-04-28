@@ -1,1 +1,1 @@
-src: vendor/bin/heroku-php-apache2 src/
+src: vendor/bin/heroku-php-nginx src/
