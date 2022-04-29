@@ -15,8 +15,8 @@ final class Environment
   public static function var(string $key = '', string $default = ''): string
   {
     // @key
-    if (isset($_ENV[$key]))
-      return $_ENV[$key];
+    if (false !== getenv($key))
+      return getenv($key);
 
     // @default
     return 0 === strlen($default) ? '' : $default;

@@ -24,9 +24,6 @@ final class Bootstrap
 		// @Runtime
 		$this->runtime = $this->getmicrotime();
 
-		// @Dotenv
-		(\Dotenv\Dotenv::createImmutable(dirname(__DIR__)))->load();
-
 		// @Container
 		$this->container = new Container();
 
