@@ -123,9 +123,5 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-dist
-
 # vuepress build output
 .vuepress/dist
