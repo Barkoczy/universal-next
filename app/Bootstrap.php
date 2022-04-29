@@ -13,10 +13,10 @@ use Slim\Middleware\ContentLengthMiddleware;
 use App\Kernel\Environment;
 use App\Filesystem\Folder;
 use App\Extensions\Guard;
-use App\Middlewares\PermissionMiddleware;
 use App\Extensions\Twig\Csrf as TwigCsrf;
 use App\Extensions\Twig\BasePath as TwigBasePath;
 use App\Extensions\Twig\Whitespace as TwigWhitespace;
+use App\Middlewares\PermissionMiddleware;
 
 final class Bootstrap
 {
@@ -249,6 +249,31 @@ final class Bootstrap
       return $response;
   	})->add(PermissionMiddleware::class);
 	}
+
+	/**
+	 * doGet
+	 *
+	 * @param string $url
+	 * @param string $component
+	 * @return void
+	 */
+	private function doGet(string $url = '', string $component = ''): void
+	{
+		$this->app->get($url, $component)->add(PermissionMiddleware::class);
+	}
+
+	/**
+	 * doPost
+	 *
+	 * @param string $url
+	 * @param string $component
+	 * @return void
+	 */
+	private function doPost(string $url = '', string $component = ''): void
+	{
+		$this->app->post($url, $component)->add(PermissionMiddleware::class);
+	}
+
 
 	/**
 	 * Calculate runtime 
