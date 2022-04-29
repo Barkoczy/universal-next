@@ -66,44 +66,4 @@ final class Folder
   {
     return realpath(self::getRootPath().'/'.Directory::KERNEL);
   }
-
-  /**
-   * Router path
-   *
-   * @return string
-   */
-  public static function getRouterPath(): string
-  {
-    return realpath(self::getKernelPath().'/'.Directory::ROUTER);
-  }
-
-  /**
-   * Router config path
-   *
-   * @return string
-   */
-  public static function getRouterConfPath(): string
-  {
-    return realpath(self::getRouterPath().'/'.Directory::CONF);
-  }
-
-  /**
-   * Components path
-   *
-   * @return string
-   */
-  public static function getControllersPath(): string
-  {
-    return realpath(self::getKernelPath().'/'.Directory::CONTROLLERS);
-  }
-
-  /**
-   * Components config path
-   *
-   * @return string
-   */
-  public static function getControllersConfigPath(): string
-  {
-    return realpath(self::getControllersPath().'/'.Directory::CONF);
-  }
 }

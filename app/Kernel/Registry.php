@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Kernel\Controllers;
+namespace App\Kernel;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class Controller
+class Registry
 {
   private $container;
   

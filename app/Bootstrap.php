@@ -10,8 +10,9 @@ use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 use Slim\Middleware\ContentLengthMiddleware;
+use App\Exceptions\RouteNotDefined;
 use App\Kernel\Environment;
-use App\Kernel\Controllers\AppController;
+use App\Kernel\Controller\AppController;
 use App\Filesystem\Folder;
 use App\Extensions\Guard;
 use App\Extensions\Twig\Csrf as TwigCsrf;
@@ -38,6 +39,10 @@ final class Bootstrap
 		// @runtime
 		$this->runtime = $this->getmicrotime();
 
+		// @enviroment
+		if (Environment::hasConfigFile())
+			(\Dotenv\Dotenv::createImmutable(dirname(__DIR__)))->load();
+
 		// @container
 		$this->container = new Container();
 
@@ -50,13 +55,7 @@ final class Bootstrap
 		// @template
 		$this->template();
 
-		/**
-		 * Instantiate App
-		 *
-		 * In order for the factory to work you need to ensure you have installed
-		 * a supported PSR-7 implementation of your choice e.g.: Slim PSR-7 and a supported
-		 * ServerRequest creator (included with Slim PSR-7)
-		 */
+		// @app
     $this->app = AppFactory::create();
 
 		// @middlewares
@@ -137,7 +136,7 @@ final class Bootstrap
 			$twig = Twig::create([
 				'app' => '../resources/views'
 			], [
-				'cache' => "false" === Environment::var('TWIG_CACHE') ? false : '../cache/twig'
+				'cache' => "true" === Environment::var('TWIG_CACHE') ? '../cache/twig' : false
 			]);
 
 			// @extensions
@@ -208,9 +207,9 @@ final class Bootstrap
 		* Note: This middleware should be added last. It will not handle any exceptions/errors
 		* for middleware added after it.
 		*/
-		$displayErrorDetails = "false" === Environment::var('DISPLAY_ERROR_DETAILS') ? false : true;
-  	$logErrors = "false" === Environment::var('LOG_ERRORS') ? false : true;
-    $logErrorDetails = "false" === Environment::var('LOG_ERROR_DETAILS') ? false : true;
+		$displayErrorDetails = "true" === Environment::var('DISPLAY_ERROR_DETAILS');
+  	$logErrors = "true" === Environment::var('LOG_ERRORS');
+    $logErrorDetails = "true" === Environment::var('LOG_ERROR_DETAILS');
 
 		// Error Middleware
 		$errorMiddleware = $this->app->addErrorMiddleware(
@@ -249,10 +248,10 @@ final class Bootstrap
 	{
 		// @route
 		$route = (new Router())->findByURL();
-		
+
 		// @validate
 		if ([] === $route)
-			return;
+			throw new RouteNotDefined('The application could not run because any route not defined');
 
 		// @controller
 		$this->container->set(RouteObject::controller, function() use ($route) {

@@ -5,5 +5,5 @@ namespace App\Router\Enum;
 
 final class Controllers
 {
-  const base = '\\App\Kernel\Controllers\BaseController';
+  const base = '\\App\Kernel\Controller\BaseController';
 }

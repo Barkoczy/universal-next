@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Kernel\Controllers;
+namespace App\Kernel\Controller;
 
 use Symfony\Component\Yaml\Yaml;
-use App\Filesystem\Folder;
 use App\Exceptions\CannotReadFileFromFilesource;
+use App\Filesystem\Folder;
 use App\Kernel\HttpDL\HttpDLClient;
-use App\Kernel\Controllers\DataFunctions;
+use App\Kernel\Controller\DataFunctions;
 
 final class DataController
 {
@@ -38,11 +38,11 @@ final class DataController
     $filepath = Folder::getConfigPath().'/template.yml';
 
     // @validate
-    if(!is_file($filepath))
+    if (!is_file($filepath))
       throw new CannotReadFileFromFilesource('Cannot read theme global vars configuration file due to insufficient permissions');
 
     // @global
-		$this->global = Yaml::parseFile($filepath);
+		$this->global = Yaml::parseFile($filepath)??[];
 
     // @schema
     $this->schema = $schema;

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Kernel\Controllers;
+namespace App\Kernel\Controller;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use App\Kernel\Controllers\Controller;
+use App\Kernel\Registry;
 
-class BaseController extends Controller
+class BaseController extends Registry
 {
   public function __invoke(Request $request, Response $response, array $args): Response
   {

@@ -1,15 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Kernel\Controllers;
+namespace App\Kernel\Controller;
 
 use Symfony\Component\Yaml\Yaml;
 use App\Filesystem\Folder;
 use App\Exceptions\CannotReadFileFromFilesource;
 
-/**
- * @package DataFunctions
- */
 final class DataFunctions
 {
   private $conf;
@@ -20,10 +17,10 @@ final class DataFunctions
   public function __construct()
   {
     // @filepath
-    $filepath = Folder::getControllersConfigPath().'/functions.yml';
+    $filepath = Folder::getConfigPath().'/functions.yml';
 
     // @validate
-    if(!is_file($filepath))
+    if (!is_file($filepath))
       throw new CannotReadFileFromFilesource('Cannot read controller functions configuration file due to insufficient permissions');
 
     // @conf

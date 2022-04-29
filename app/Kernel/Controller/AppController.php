@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Kernel\Controllers;
+namespace App\Kernel\Controller;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Router\Enum\RouteObject;
-use App\Kernel\Controllers\DataController;
+use App\Kernel\Controller\DataController;
 
 final class AppController
 {

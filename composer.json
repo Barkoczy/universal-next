@@ -55,7 +55,8 @@
     "fullpipe/twig-webpack-extension": "^4.0",
     "voku/html-compress-twig": "^4.0",
     "mailgun/mailgun-php": "^3.5",
-    "sendgrid/sendgrid": "^7.11"
+    "sendgrid/sendgrid": "^7.11",
+    "vlucas/phpdotenv": "^5.4"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"

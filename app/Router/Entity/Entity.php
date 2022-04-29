@@ -44,7 +44,7 @@ abstract class Entity
     // @set
     $this->setMethod($route);
     $this->setURL($route);
-    $this->setComponent($route);
+    $this->setController($route);
     $this->setTemplate($route);
     $this->setData($route);
   }
@@ -56,7 +56,7 @@ abstract class Entity
    */
   private function filepath(): string
   {
-    return Folder::getRouterConfPath().'/entity.yaml';
+    return Folder::getConfigPath().'/entity.yml';
   }
 
   /**
@@ -92,14 +92,14 @@ abstract class Entity
    * @param array $route
    * @return void
    */
-  private function setComponent(array $route = []): void
+  private function setController(array $route = []): void
   {
     if (isset($route[RouteObject::controller]) &&
       0 < strlen($route[RouteObject::controller])
     ) {
-      $this->component = $route[RouteObject::controller];
+      $this->controller = $route[RouteObject::controller];
     } else {
-      $this->component = Controllers::base;
+      $this->controller = Controllers::base;
     }
   }
 
@@ -109,7 +109,7 @@ abstract class Entity
    */
   private function setTemplate(array $route = []): void
   {
-    if(!isset($route[RouteObject::template]))
+    if (!isset($route[RouteObject::template]))
       throw new MissingParameter('Missing parameter template in routes configuration file');
 
     $this->template = '@app/'.$route[RouteObject::template];
@@ -121,7 +121,7 @@ abstract class Entity
    */
   private function setData(array $route = []): void
   {
-    if(isset($route[RouteObject::data]) &&
+    if (isset($route[RouteObject::data]) &&
       is_array($route[RouteObject::data]) &&
       0 < count($route[RouteObject::data])
     ) {
