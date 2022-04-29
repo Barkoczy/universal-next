@@ -54,7 +54,8 @@
     "symfony/yaml": "^6.0",
     "phpmailer/phpmailer": "^6.6",
     "fullpipe/twig-webpack-extension": "^4.0",
-    "voku/html-compress-twig": "^4.0"
+    "voku/html-compress-twig": "^4.0",
+    "mailgun/mailgun-php": "^3.5"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"

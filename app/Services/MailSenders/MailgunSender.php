@@ -2,6 +2,7 @@
 namespace App\Services\MailSenders;
 
 use Mailgun\Mailgun;
+use App\Kernel\Environment;
 
 final class MailgunSender
 {
@@ -12,8 +13,8 @@ final class MailgunSender
    */
   public function __construct()
   {
-    $this->client = new Mailgun('1d8bc21ff0078b2bc1ca6df43ca4b10d-53ce4923-5bf81416');
-    $this->domain = "sandbox344f1662b7e448039a38055e73debec6.mailgun.org";
+    $this->client = new Mailgun(Environment::var('MAILGUN_PRIVATE_API_KEY'));
+    $this->domain = Environment::var('MAILGUN_DOMAIN');
   }
 
   /**
