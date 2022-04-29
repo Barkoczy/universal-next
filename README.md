@@ -1,6 +1,6 @@
 # UNIVERSAL.next
 
-Hobby, Study, Deploy. The Open Source Codebase Alternative. Create a webapp in less than 2 minutes. 
+The Open Source Codebase Alternative For Hobby, Study and Deploy. Create a webapp in less than 2 minutes. 
 Start your project with a Database, Authentication, instant APIs, Realtime subscriptions and Storage.
 
 ## Bring up local development via Docker
