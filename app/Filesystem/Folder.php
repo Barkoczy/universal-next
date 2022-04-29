@@ -92,9 +92,9 @@ final class Folder
    *
    * @return string
    */
-  public static function getComponentsPath(): string
+  public static function getControllersPath(): string
   {
-    return realpath(self::getKernelPath().'/'.Directory::COMPONENTS);
+    return realpath(self::getKernelPath().'/'.Directory::CONTROLLERS);
   }
 
   /**
@@ -102,8 +102,8 @@ final class Folder
    *
    * @return string
    */
-  public static function getComponentsConfigPath(): string
+  public static function getControllersConfigPath(): string
   {
-    return realpath(self::getComponentsPath().'/'.Directory::CONF);
+    return realpath(self::getControllersPath().'/'.Directory::CONF);
   }
 }

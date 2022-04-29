@@ -11,11 +11,15 @@ use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 use Slim\Middleware\ContentLengthMiddleware;
 use App\Kernel\Environment;
+use App\Kernel\Controllers\AppController;
 use App\Filesystem\Folder;
 use App\Extensions\Guard;
 use App\Extensions\Twig\Csrf as TwigCsrf;
 use App\Extensions\Twig\BasePath as TwigBasePath;
 use App\Extensions\Twig\Whitespace as TwigWhitespace;
+use App\Router\Enum\HttpRequestMethod;
+use App\Router\Enum\RouteObject;
+use App\Router\Router;
 use App\Middlewares\PermissionMiddleware;
 
 final class Bootstrap
@@ -243,35 +247,51 @@ final class Bootstrap
 	 */
 	private function router(): void
 	{
-		// @hello-world
-    $this->app->get('/', function (Request $request, Response $response, $args) {
-      $response->getBody()->write("Hello world!");
-      return $response;
-  	})->add(PermissionMiddleware::class);
+		// @route
+		$route = (new Router())->findByURL();
+		
+		// @validate
+		if ([] === $route)
+			return;
+
+		// @controller
+		$this->container->set(RouteObject::controller, function() use ($route) {
+			return new AppController($route);
+		});
+
+		// @doGet
+		if (HttpRequestMethod::GET === $route[RouteObject::method]){
+			$this->doGet($route[RouteObject::url], $route[RouteObject::controller]);
+		}
+
+		// @doPost
+		if (HttpRequestMethod::POST === $route[RouteObject::method]){
+			$this->doPost($route[RouteObject::url], $route[RouteObject::controller]);
+		}
 	}
 
 	/**
 	 * doGet
 	 *
 	 * @param string $url
-	 * @param string $component
+	 * @param string $controller
 	 * @return void
 	 */
-	private function doGet(string $url = '', string $component = ''): void
+	private function doGet(string $url = '', string $controller = ''): void
 	{
-		$this->app->get($url, $component)->add(PermissionMiddleware::class);
+		$this->app->get($url, $controller)->add(PermissionMiddleware::class);
 	}
 
 	/**
 	 * doPost
 	 *
 	 * @param string $url
-	 * @param string $component
+	 * @param string $controller
 	 * @return void
 	 */
-	private function doPost(string $url = '', string $component = ''): void
+	private function doPost(string $url = '', string $controller = ''): void
 	{
-		$this->app->post($url, $component)->add(PermissionMiddleware::class);
+		$this->app->post($url, $controller)->add(PermissionMiddleware::class);
 	}
 
 

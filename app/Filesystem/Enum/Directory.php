@@ -5,7 +5,7 @@ namespace App\Filesystem\Enum;
 
 final class Directory {
   const KERNEL = 'app/Kernel';
-  const COMPONENTS = 'Components';
+  const CONTROLLERS = 'Controllers';
   const ROUTER = 'Router';
   const CONF = 'conf';
   const ASSETS = 'assets';
