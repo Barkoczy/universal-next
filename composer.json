@@ -1,0 +1,64 @@
+{
+  "name": "barkoczy/universal-next",
+  "description": "Hobby, Study, Deploy Open Source Publishing Platform",
+  "keywords": ["universal"],
+  "homepage": "https://universal-next.herokuapp.com",
+  "support": {
+    "issues": "https://github.com/Barkoczy/universal-next/issues",
+    "source": "https://github.com/Barkoczy/universal-next"
+  },
+  "authors": [
+    {
+      "name": "Henrich Barkoczy",
+      "email": "henrich.barkoczy@tutanota.com"
+    }
+  ],
+  "type": "project",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "dev": "php -S localhost:8080 -t public public/index.php",
+    "create-env-config-file": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "create-project": [
+      "@php cli key:generate"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^8.1.0",
+    "ext-bcmath": "*",
+    "ext-mongodb": "^1.1.0",
+    "slim/slim": "4.*",
+    "slim/psr7": "^1.5",
+    "slim/twig-view": "^3.3",
+    "php-di/php-di": "^6.4",
+    "illuminate/database": "^9.10",
+    "illuminate/events": "^9.10",
+    "mongodb/mongodb": "^1.12",
+    "jenssegers/mongodb": "^3.9",
+    "nesbot/carbon": "^2.57",
+    "guzzlehttp/guzzle": "^7.4",
+    "symfony/yaml": "^6.0",
+    "phpmailer/phpmailer": "^6.6",
+    "fullpipe/twig-webpack-extension": "^4.0",
+    "voku/html-compress-twig": "^4.0",
+    "mailgun/mailgun-php": "^3.5",
+    "sendgrid/sendgrid": "^7.11",
+    "vlucas/phpdotenv": "^5.4"
+  },
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "*"
+  }
+}
